@@ -1,2 +1,4 @@
-# AdvCD
-AdvCD: Adversarial Attack on Deep Learning-based Code Clone Detection Models
+# SPAA
+SPAA: Semantic-Preserving Adversarial Attack on Deep Learning Models for Code Clone Detection
+## Overview
+Deep learning-based models have revolutionized code clone detection by achieving remarkable accuracy across various clone types, from syntactic to semantic similarities. However, the robustness of these models against adversarial attacks remains largely unexplored. In this paper, we present SPAA, a novel framework for designing and evaluating adversarial attacks on state-of-the-art code clone detection models, including ASTNN and CodeToken Learner. Using the BigCloneBench and OjClone datasets, we systematically craft adversarial examples through lexical and structural perturbations, ensuring the functionality of the code remains intact. Our experiments reveal that code clone detection models are vulnerable to adversarial attack.

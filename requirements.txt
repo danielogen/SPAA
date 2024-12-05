@@ -1,0 +1,16 @@
+anytree
+astor
+einops
+javalang
+pandas    
+pip
+pycparser
+torch-geometric 
+torchaudio
+torchvision
+click 
+gensim
+scikit-learn
+setuptools
+torch
+tqdm
