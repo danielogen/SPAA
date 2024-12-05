@@ -1,3 +1,17 @@
+
+# mine
+datasets/astnn/c/asts.pkl
+datasets/astnn/c/dev/
+datasets/astnn/c/train/
+datasets/astnn/c/test/
+
+datasets/astnn/java/asts.pkl
+datasets/astnn/java/dev/
+datasets/astnn/java/train/
+datasets/astnn/java/test/
+
+datasets/codetoken/bcbresult
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
