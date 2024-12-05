@@ -3,7 +3,6 @@ astor
 einops
 javalang
 pandas    
-pip
 pycparser
 torch-geometric 
 torchaudio
