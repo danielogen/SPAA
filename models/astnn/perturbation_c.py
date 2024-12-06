@@ -18,19 +18,19 @@ class CAdversarialCodeTransformer:
         def generate_variant(code):
             """Generate a single adversarial variant for C code"""
             # 1. Identifier Renaming
-            # def obfuscate_identifiers(code_str):
-            #     # Simple identifier replacement using regex
-            #     def replace_identifier(match):
-            #         original = match.group(0)
-            #         keywords = ['int', 'char', 'void', 'return', 'if', 'else', 'for', 'while']
-            #         if original in keywords:
-            #             return original
-            #         # Ensure valid identifier
-            #         return f"adv_{abs(hash(original)) % 10000}"
+            def obfuscate_identifiers(code_str):
+                # Simple identifier replacement using regex
+                def replace_identifier(match):
+                    original = match.group(0)
+                    keywords = ['int', 'char', 'void', 'return', 'if', 'else', 'for', 'while']
+                    if original in keywords:
+                        return original
+                    # Ensure valid identifier
+                    return f"adv_{abs(hash(original)) % 10000}"
                 
-            #     # Replace variable and function names
-            #     obfuscated = re.sub(r'\b[a-zA-Z_][a-zA-Z0-9_]*\b', replace_identifier, code_str)
-            #     return obfuscated
+                # Replace variable and function names
+                obfuscated = re.sub(r'\b[a-zA-Z_][a-zA-Z0-9_]*\b', replace_identifier, code_str)
+                return obfuscated
             def rename_variables_in_main(code):
                 """
                 Rename variables in the main function of the given C code using regex.
@@ -120,9 +120,9 @@ class CAdversarialCodeTransformer:
             
             # Apply transformations
             variant = code
-            # variant = obfuscate_identifiers(variant)
-            # variant  = rename_variables_in_main(variant)
-            # variant = transform_expressions(variant)
+            variant = obfuscate_identifiers(variant)
+            variant  = rename_variables_in_main(variant)
+            variant = transform_expressions(variant)
             variant = inject_redundant_code(variant)
 
             # Parse to AST
