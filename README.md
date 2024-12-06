@@ -82,5 +82,12 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+## Running the Experiments
+To run the ASTNN model:
+```bash
+python models/astnn/train.py --lang C 
+python models/astnn/train.py --lang C --adversarial
+```
+
 ## License
 This repository is MIT licensed. See the [LICENSE](./LICENSE) file for more information.
