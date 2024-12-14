@@ -124,7 +124,7 @@ def createast():
     asts=[]
     paths=[]
     alltokens=[]
-    dirname = 'BCB/bigclonebenchdata/'
+    dirname = '../../datasets/codetoken/BCB/bigclonebenchdata/'
     for rt, dirs, files in os.walk(dirname):
         for file in files:
             programfile=open(os.path.join(rt,file),encoding='utf-8')
@@ -204,8 +204,8 @@ def createseparategraph(astdict, vocablen, vocabdict, device):
         # sys.exit()
     return astdict
 
-def creategmndata(id,treedict,vocablen,vocabdict,device):
-    indexdir='BCB/'
+def creategmndata(id,treedict,vocablen,vocabdict,device, adversarial):
+    indexdir='../../datasets/codetoken/BCB/'
     if id=='0':
         trainfile = open(indexdir+'traindata.txt')
         validfile = open(indexdir+'devdata.txt')
@@ -224,22 +224,24 @@ def creategmndata(id,treedict,vocablen,vocabdict,device):
     validdata=[]
     testdata=[]
     print('train data')
-    traindata=createpairdata(treedict,trainlist,device=device)
+    traindata=createpairdata(treedict,trainlist,device,adversarial)
     print('valid data')
-    validdata=createpairdata(treedict,validlist,device=device)
+    validdata=createpairdata(treedict,validlist,device,adversarial)
     print('test data')
-    testdata=createpairdata(treedict,testlist,device=device)
+    testdata=createpairdata(treedict,testlist,device,adversarial)
     return traindata, validdata, testdata
 
-def createpairdata(treedict,pathlist,device):
+def createpairdata(treedict,pathlist,device, adversarial):
     datalist=[]
     countlines=1
+    if adversarial:
+        print("Adversarial attack on CodeToken Learner")
     for line in pathlist:
         #print(countlines)
         countlines += 1
         pairinfo = line.split()
-        code1path='BCB'+pairinfo[0].strip('.')
-        code2path='BCB'+pairinfo[1].strip('.')
+        code1path='../../datasets/codetoken/BCB'+pairinfo[0].strip('.')
+        code2path='../../datasets/codetoken/BCB'+pairinfo[1].strip('.')
         label=int(pairinfo[2])
         data1 = treedict[code1path]
         # print("========", data1)
@@ -248,7 +250,8 @@ def createpairdata(treedict,pathlist,device):
         x1, edge_index1, ast1length, df1, bf1 = data1[0][0],data1[0][1], data1[1], data1[2], data1[3]
         x2, edge_index2, ast2length, df2, bf2 = data2[0][0],data2[0][1], data2[1], data2[2], data2[3]
         # apply peturbation to x1
-        # x1 = perturbation_noise.add_random_noise(x1,0.1)
+        if adversarial:
+            x1 = perturbation_noise.add_random_noise(x1,0.1)
         # x2 = perturbation_noise.add_random_noise(x2,0.1)
         data = [[x1, x2, edge_index1, edge_index2, df1, df2, bf1, bf2], label]
         datalist.append(data)
