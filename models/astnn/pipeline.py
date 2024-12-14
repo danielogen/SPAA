@@ -277,7 +277,7 @@ class Pipeline:
 @click.option('--num-variants', default=2, 
               help="Number of adversarial variants to generate per sample")
 def main(lang, adversarial, num_variants):
-    ppl = Pipeline(RATIO, 'data', str(lang))
+    ppl = Pipeline(RATIO, '../../datasets/astnn', str(lang))
     # Optionally enable adversarial mode
     if adversarial:
         ppl.enable_adversarial_mode(num_variants=num_variants)

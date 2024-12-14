@@ -84,8 +84,18 @@ pip install -r requirements.txt
 
 ## Running the Experiments
 To run the ASTNN model:
+First, run the pipeline to generate AST statement trees for training
 ```bash
-python models/astnn/train.py --lang C 
+cd models/astnn
+python pipeline.py --lang C 
+```
+Now train
+```bash
+python train.py --lang C 
+```
+
+Run adversarial attack
+```bash
 python models/astnn/train.py --lang C --adversarial
 ```
 

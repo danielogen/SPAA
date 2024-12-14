@@ -120,9 +120,9 @@ class CAdversarialCodeTransformer:
             
             # Apply transformations
             variant = code
-            variant = obfuscate_identifiers(variant)
-            variant  = rename_variables_in_main(variant)
-            variant = transform_expressions(variant)
+            # variant = obfuscate_identifiers(variant)
+            # variant  = rename_variables_in_main(variant)
+            # variant = transform_expressions(variant)
             variant = inject_redundant_code(variant)
 
             # Parse to AST
