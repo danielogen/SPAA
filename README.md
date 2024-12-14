@@ -96,7 +96,18 @@ python train.py --lang C
 
 Run adversarial attack
 ```bash
-python models/astnn/train.py --lang C --adversarial
+python train.py --lang C --adversarial
+```
+
+To run the ASTNN model:
+Training the baseline model
+```bash
+cd models/codetokenlearner
+python main.py --cuda=False 
+```
+Run adversarial attack
+```bash
+python main.py --cuda=False --adversarial=True
 ```
 
 ## License
