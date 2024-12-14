@@ -28,19 +28,24 @@ parser.add_argument("--mlp_dim_num", default=128)
 parser.add_argument("--num_epochs", default=10)
 parser.add_argument("--lr", default=0.001)
 parser.add_argument("--threshold", default=0.1)
+parser.add_argument("--adversarial", default=False)
 args = parser.parse_args()
 
-device=torch.device('cpu')
-astdict, vocablen, vocabdict = createast()
-treedict=createseparategraph(astdict, vocablen, vocabdict, device)
-traindata,validdata,testdata=creategmndata(args.data_setting, treedict, vocablen, vocabdict, device)
-print(len(traindata))
 
 inp_dim_num=args.inp_dim_num
 num_heads=args.num_heads
 head_dim_num=args.head_dim_num
 dropout=args.dropout
 num_layers=args.num_layers
+adversarial = args.adversarial
+
+device=torch.device('cpu')
+astdict, vocablen, vocabdict = createast()
+treedict=createseparategraph(astdict, vocablen, vocabdict, device)
+traindata,validdata,testdata=creategmndata(args.data_setting, treedict, vocablen, vocabdict, device,adversarial)
+print(len(traindata))
+
+
 model = models.CloneTrans(vocablen, inp_dim_num, num_heads, head_dim_num, dropout, num_layers, device=device)
 model = model.to(device)
 
